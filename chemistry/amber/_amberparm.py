@@ -1442,8 +1442,8 @@ class AmberParm(AmberFormat, Structure):
         if 'ATOMIC_NUMBER' in data:
             data['ATOMIC_NUMBER'] = [atom.atomic_number for atom in self.atoms]
             for iatom, atom in enumerate(self.atoms):
-                 if atom.atomic_number == 0:
-                     data['AMBER_ATOM_TYPE'][iatom] = 'EP'
+                if atom.atomic_number == 0:
+                    data['AMBER_ATOM_TYPE'][iatom] = 'EP'
         # Do the non-bonded exclusions now
         data['EXCLUDED_ATOMS_LIST'] = []
         nextra = 0
