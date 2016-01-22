@@ -420,8 +420,8 @@ refene1 = _ReferenceEnergy(igb1=0, igb2=0, igb5=0, igb7=0, igb8=0)
 refene1.solvent_energies()
 refene1.dielc2_energies(igb1=0, igb2=0, igb5=0, igb7=0, igb8=0)
 refene1.dielc2.solvent_energies()
-refene2 = _ReferenceEnergy(igb1=21.4298008, igb2=26.8894581, igb5=26.5980488,
-                 igb7=23.4181107, igb8=26.3448911)
+refene2 = _ReferenceEnergy(igb1=21.4298008, igb2=33.299396994, igb5=26.5980488,
+                 igb7=23.4181107, igb8=29.0906942)
 refene2.solvent_energies(igb2=33.2613028)
 refene2.dielc2_energies(igb2=12.676908, igb5=13.084913)
 refene2.dielc2.solvent_energies()
@@ -453,8 +453,8 @@ refene1 = _ReferenceEnergy(igb1=0, igb2=0, igb5=0, igb7=0, igb8=0)
 refene1.solvent_energies()
 refene1.dielc2_energies(igb1=0, igb2=0, igb5=0, igb7=0, igb8=0)
 refene1.dielc2.solvent_energies()
-refene2 = _ReferenceEnergy(igb1=3.89691326, igb2=8.4057785, igb5=8.0855764,
-               igb7=5.305949, igb8=8.3591335)
+refene2 = _ReferenceEnergy(igb1=3.89691326, igb2=15.18076956, igb5=8.0855764,
+               igb7=5.305949, igb8=16.3385462)
 refene2.solvent_energies(igb2=15.20019319)
 refene2.dielc2_energies(igb2=3.455596, igb5=3.957270)
 refene2.dielc2.solvent_energies()
