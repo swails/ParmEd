@@ -7,6 +7,8 @@ Can be used like:
 from __future__ import division
 from math import pi as _pi, sqrt as _sqrt
 
+import parmed.unit as u
+
 __all__ = ['AMBER_ELECTROSTATIC', 'AMBER_POINTERS', 'NATOM', 'NTYPES', 'NBONH',
            'MBONA', 'NTHETH', 'MTHETA', 'NPHIH', 'MPHIA', 'NHPARM', 'NPARM',
            'NEXT', 'NRES', 'NBONA', 'NTHETA', 'NPHIA', 'NUMBND', 'NUMANG',
@@ -18,7 +20,7 @@ AMBER_ELECTROSTATIC = 18.2223
 CHARMM_ELECTROSTATIC = _sqrt(332.0716)
 
 AMBER_POINTERS = """
-NATOM  : total number of atoms 
+NATOM  : total number of atoms
 NTYPES : total number of distinct atom types
 NBONH  : number of bonds containing hydrogen
 MBONA  : number of bonds not containing hydrogen
@@ -28,7 +30,7 @@ NPHIH  : number of dihedrals containing hydrogen
 MPHIA  : number of dihedrals not containing hydrogen
 NHPARM : currently not used
 NPARM  : currently not used
-NEXT   : number of excluded atoms 
+NEXT   : number of excluded atoms
 NRES   : number of residues
 NBONA  : MBONA + number of constraint bonds
 NTHETA : MTHETA + number of constraint angles
@@ -71,3 +73,6 @@ DEG_TO_RAD = _pi / 180.0
 # For use in floating point comparisons
 TINY = 1.0e-8
 SMALL = 1.0e-4
+
+# Physical constants
+GAS_CONSTANT = 8.3144598 * u.joules_per_mole/u.kelvin
