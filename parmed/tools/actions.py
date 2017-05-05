@@ -11,9 +11,8 @@ import warnings
 from collections import Counter, OrderedDict
 
 import numpy as np
-import parmed.gromacs as gromacs
 
-from .. import unit as u
+from .. import unit as u, gromacs
 from ..amber import (AmberAsciiRestart, AmberMask, AmberMdcrd, AmberParm,
                      AmoebaParm, ChamberParm, NetCDFRestart, NetCDFTraj)
 from ..amber._chamberparm import ConvertFromPSF
@@ -374,7 +373,8 @@ class loadCoordinates(Action):
         return 'Adding coordinates to %s from %s' % (self.parm.name, self.filename)
 
     def execute(self):
-        crd = load_file(self.filename, natom=len(self.parm.atoms), hasbox=self.parm.box is not None)
+        crd = load_file(self.filename, natom=len(self.parm.atoms),
+                        hasbox=self.parm.box is not None, structure=True)
         try:
             self.parm.coordinates = crd.coordinates.copy()
         except AttributeError:

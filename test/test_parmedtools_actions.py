@@ -2233,6 +2233,11 @@ class TestChamberParmActions(FileIOTestCase, TestCaseRelative):
         self.assertTrue(diff_files(get_fn('ala_ala_ala.rst7'),
                                    get_fn('test.rst7', written=True),
                                    absolute_error=0.0001))
+        # Check loadCoordinates with a mol2 file
+        parm.save(get_fn('test_crds.mol2', written=True))
+        crds_before = parm.coordinates
+        PT.loadCoordinates(parm, get_fn('test_crds.mol2', written=True)).execute()
+        np.testing.assert_allclose(parm.coordinates, crds_before)
         # Check loadCoordinates error handling
         self.assertRaises(exc.ParmError, lambda:
                 PT.loadCoordinates(parm, get_fn('trx.prmtop')).execute())
