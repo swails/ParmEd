@@ -1425,9 +1425,9 @@ class Structure(object):
         Parameters
         ----------
         fname : str or file-like object
-            Name of the file or file-like object to save. If ``format`` is 
-            ``None`` (see below), the file type will be determined based on 
-            the filename extension. If ``fname`` is file-like object,  ``format`` 
+            Name of the file or file-like object to save. If ``format`` is
+            ``None`` (see below), the file type will be determined based on
+            the filename extension. If ``fname`` is file-like object,  ``format``
             must be  provided. If the type cannot be determined, a ValueError is raised.
         format : str, optional
             The case-insensitive keyword specifying what type of file ``fname``
@@ -2011,6 +2011,9 @@ class Structure(object):
             If True, the dihedrals will be split into two forces -- proper and
             impropers. This is primarily useful for debugging torsion parameter
             assignments.
+        gbsaModel : str=None
+            Can be set to ACE or None (default) to specify which non-polar
+            solvation model to use.
 
         Notes
         -----
@@ -2019,6 +2022,11 @@ class Structure(object):
         if self.unknown_functional:
             raise ParameterError('Cannot createSystem: unknown functional')
         # Establish defaults
+        if gbsaModel is not None:
+            if gbsaModel == 'ACE':
+                useSASA = True
+            elif implicitSolvent is not None:
+                raise ValueError('gbsaModel must be \'ACE\' or None')
         if nonbondedMethod is None:
             nonbondedMethod = app.NoCutoff
         system = mm.System()
