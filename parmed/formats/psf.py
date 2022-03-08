@@ -267,8 +267,42 @@ class PSFFile(metaclass=FileFormatType):
             if len(struct.atoms) % 8 != 0: dest.write('\n')
             dest.write('\n')
             # NUMLP/NUMLPH section
-            dest.write((intfmt*2) % (0, 0) + ' !NUMLP NUMLPH\n')
-            dest.write('\n')
+            # if struct.groups.numlp != None:
+            if hasattr(struct.groups, 'numlp') and struct.groups.numlp != None:
+                dest.write(
+                    (intfmt * 2) % (struct.groups.numlp[0], struct.groups.numlp[1])
+                    + " !NUMLP NUMLPH\n"
+                )
+                last_line = ""
+                i = 1
+                for pos, atom in enumerate(struct.atoms):
+                    if hasattr(atom, "frame"):
+                        dest.write(
+                            (intfmt * 2) % (2, i)
+                            + ("%4s%10.5f%14.5f%14.5f")
+                            % (
+                                "F",
+                                atom.frame.local_position[0],
+                                atom.frame.local_position[1],
+                                atom.frame.local_position[2],
+                            )
+                            + "\n"
+                        )
+                        idxs = [
+                            atom._idx + 1,
+                            atom.frame.atom1._idx + 1,
+                            atom.frame.atom2._idx + 1,
+                        ]
+                        for j in idxs:
+                            last_line += (intfmt) % (j)
+                            if i % 8 == 0:
+                                last_line += "\n"
+                            i += 1
+                dest.write(f"{last_line}\n")
+                dest.write("\n")
+            else:
+                dest.write((intfmt * 2) % (0, 0) + " !NUMLP NUMLPH \n")
+                dest.write("\n")
         # CMAP section
         dest.write(intfmt % len(struct.cmaps) + ' !NCRTERM: cross-terms\n')
         for i, cmap in enumerate(struct.cmaps):

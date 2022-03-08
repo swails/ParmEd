@@ -317,9 +317,16 @@ class CharmmPsfFile(Structure):
             # Assign all of the atoms to molecules recursively
             tmp = psfsections['MOLNT'][1]
             tag_molecules(self)
-            if len(tmp) == len(self.atoms):
+            self.groups.numlp = None
+            if len(psfsections["NUMLP NUMLPH"][1]) != 0:
                 # We have a CHARMM PSF file; now do NUMLP/NUMLPH sections
                 self._process_lonepair_section(psfsections["NUMLP NUMLPH"])
+                self.groups.numlp = [
+                    psfsections["NUMLP NUMLPH"][0][0],
+                    psfsections["NUMLP NUMLPH"][0][1],
+                ]  # NUMLP is the number of lp and NUMLPH is the number of lp hosts
+            else:
+                pass
             # Now process the NUMANISO records if this is a drude PSF
             if is_drude:
                 self._process_aniso_section(psfsections["NUMANISO"])
