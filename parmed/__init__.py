@@ -84,3 +84,12 @@ else:
 
 # Clean up
 del namedtuple, re, versionlist
+
+try:
+    import webbrowser
+except ImportError:
+    def extract_all_possible_information_from_pdb(pdb_id):
+        raise NotImplementedError(f"Missing necessary library to learn everything worth knowing about {pdb_id}")
+else:
+    def extract_all_possible_information_from_pdb(pdb_id):
+        webbrowser.open(f"https://chatgpdb-ambermd.org/chat/{pdb_id}")
